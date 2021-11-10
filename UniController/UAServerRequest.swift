@@ -4,9 +4,10 @@
 import Cocoa
 class UAServerRequest: NSObject {
     //HTTPリクエストの送受信を同期的に行う
-    class func postSync(urlString:String, param:String)->Any {
-        //戻り値の定義（Anyの初期化は何を代入しても良さそう）
-        //var list:[String:Any] = [:]
+    //param: x-www-form-urlencoded形式のも文字列
+    //戻り値: レスポンスのJSON形式データをJSONSerializationによりJSONオブジェクトに変換して返す。
+    class func postSync(urlString:String, param:String)->Any
+    {
         var list:Any = []
         //パラメータをDataオブジェクトに変換
         guard let data = param.data(using: .utf8)  else {
@@ -16,11 +17,10 @@ class UAServerRequest: NSObject {
         //URLリクエストオブジェクトの作成
         let url:URL = URL.init(string: urlString)!
         var request:URLRequest = URLRequest(url: url)
-        //リクエストヘッダの指定
-        request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
         //パラメータの設定
+        request.httpMethod = "POST"
+        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue(String(format:"%ld", data.count) , forHTTPHeaderField: "Content-Length")
         request.httpBody = data
         //ネットワーク通信オブジェクトの生成（一時セッション）
@@ -52,7 +52,7 @@ class UAServerRequest: NSObject {
                     semaphore.signal()
                     return
                 }
-                do{ //Json文字列をオブジェクトに変換する
+                do{ //JSON文字列をJSONオブジェクトに変換する
                     let responseList = try JSONSerialization.jsonObject(with: data)
                     list = responseList
                 }catch{
@@ -62,7 +62,6 @@ class UAServerRequest: NSObject {
                 }
                 semaphore.signal()//処理の再開
                 return
-                
         })
         task.resume() //実行
         semaphore.wait() //送受信が終了するまで待機する
