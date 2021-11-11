@@ -7,6 +7,8 @@ macOS Mojava 10.14.6 / Xcode 11.3.1 / Swift 5.0
 
 <img src="http://mikomokaru.sakura.ne.jp/data/B67/custom_tableview.png" alt="findingWords2" title="custom_tableview" width="400">
 
+※ AppDelegate データを取得する処理はコメントアウトしている。辞書の定義に従い各自作成してください。
+
 詳細　[http://mikomokaru.sakura.ne.jp/data/B67/custom_tableview.html](http://mikomokaru.sakura.ne.jp/data/B67/custom_tableview.html)
 
 
