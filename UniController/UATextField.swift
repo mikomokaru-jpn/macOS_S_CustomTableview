@@ -6,6 +6,7 @@ class UATextField: NSTextField
 
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
+        self.isEditable = false
     
     }
     required init?(coder aDecoder: NSCoder) {

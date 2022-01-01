@@ -28,7 +28,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         // DBからデータを取得することを想定
         // [["id": 500, "date": 20181001, "upper": 123, "lower": 95, "pulse": 28], ... ]
         
-        /*
+        
         let cmd = "http://192.168.11.3/doc_health_calendar/php/sql_r12.php"
         //let cmd = "http://localhost/doc_health_calendar/php/sql_r12.php"
         let fromDate = "20180910"
@@ -39,7 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if let unwrappedList  = list as? [[String:Any]] {
             dataList = unwrappedList
         }
-        */
+        
         return dataList
     }
 }
